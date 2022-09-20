@@ -24,5 +24,13 @@ def get_score(id):
     if request.method == 'GET':
         return [row for row in scores_table if row['user_id'] == id]
 
+# Add score to database
+@app.route('/api/scores', methods=['POST'])
+def add_score():
+    if request.method == 'POST':
+        data = request.get_json()
+        scores_table.append({'score': data['wpm'], 'user_id': data['userId']})
+        return data
+
 if __name__ == '__main__':
     app.run()
