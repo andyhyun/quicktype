@@ -15,14 +15,14 @@ provider "aws" {
   region = "us-east-1"
 }
 
-# define an ECS cluster for taskjuggler
-resource "aws_ecs_cluster" "taskjuggler_cluster" {
-  name = "taskjuggler_cluster"
+# define an ECS cluster for quicktype
+resource "aws_ecs_cluster" "quicktype_cluster" {
+  name = "quicktype_cluster"
 }
 
 # define a task for the frontend webserver
-resource "aws_ecs_task_definition" "taskjuggler_frontend_webserver" {
-  family                   = "taskjuggler_frontend_webserver"
+resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
+  family                   = "quicktype_frontend_webserver"
   task_role_arn            = "arn:aws:iam::186932938567:role/ecsTaskExecutionRole"
   execution_role_arn       = "arn:aws:iam::186932938567:role/ecsTaskExecutionRole"
   network_mode             = "awsvpc"
@@ -47,12 +47,12 @@ resource "aws_ecs_task_definition" "taskjuggler_frontend_webserver" {
 }
 
 # define a service, running 5 instances of the frontend webserver
-resource "aws_ecs_service" "taskjuggler_frontend_webserver_service" {
-  name                   = "taskjuggler_frontend_webserver_service"
+resource "aws_ecs_service" "quicktype_frontend_webserver_service" {
+  name                   = "quicktype_frontend_webserver_service"
   enable_execute_command = true
   launch_type            = "FARGATE"
-  cluster                = aws_ecs_cluster.taskjuggler_cluster.id
-  task_definition        = aws_ecs_task_definition.taskjuggler_frontend_webserver.id
+  cluster                = aws_ecs_cluster.quicktype_cluster.id
+  task_definition        = aws_ecs_task_definition.quicktype_frontend_webserver.id
   desired_count          = 5
   network_configuration {
     subnets          = ["subnet-0b8f437d046a9d818"]
