@@ -53,7 +53,7 @@ resource "aws_ecs_service" "quicktype_frontend_webserver_service" {
   launch_type            = "FARGATE"
   cluster                = aws_ecs_cluster.quicktype_cluster.id
   task_definition        = aws_ecs_task_definition.quicktype_frontend_webserver.id
-  desired_count          = 5
+  desired_count          = 1
   network_configuration {
     # subnets          = ["subnet-0b8f437d046a9d818"]
     subnets          = ["subnet-01524a7fe6bf7c90d"]
