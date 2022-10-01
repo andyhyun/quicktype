@@ -25,10 +25,10 @@ resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
   family                   = "quicktype_frontend_webserver"
   task_role_arn            = "arn:aws:iam::800636676873:role/ecsTaskExecutionRole"
   execution_role_arn       = "arn:aws:iam::800636676873:role/ecsTaskExecutionRole"
-  network_mode             = "awsvpc"
-  requires_compatibilities = ["FARGATE"]
-  cpu                      = 256
-  memory                   = 512
+  # network_mode             = "awsvpc"
+  requires_compatibilities = ["EC2"]
+  cpu                      = 1024
+  memory                   = 1024
 
   container_definitions = jsonencode([
     {
@@ -50,15 +50,15 @@ resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
 resource "aws_ecs_service" "quicktype_frontend_webserver_service" {
   name                   = "quicktype_frontend_webserver_service"
   enable_execute_command = true
-  launch_type            = "FARGATE"
+  launch_type            = "EC2"
   cluster                = aws_ecs_cluster.quicktype_cluster.id
   task_definition        = aws_ecs_task_definition.quicktype_frontend_webserver.id
   desired_count          = 1
-  network_configuration {
-    # subnets          = ["subnet-0b8f437d046a9d818"]
-    subnets          = ["subnet-01524a7fe6bf7c90d"]
-    # security_groups  = ["sg-057af67719d0de21b"]
-    security_groups  = ["sg-0025bb409aeb1a575"]
-    assign_public_ip = true
-  }
+  # network_configuration {
+  #   # subnets          = ["subnet-0b8f437d046a9d818"]
+  #   subnets          = ["subnet-01524a7fe6bf7c90d"]
+  #   # security_groups  = ["sg-057af67719d0de21b"]
+  #   security_groups  = ["sg-0025bb409aeb1a575"]
+  #   assign_public_ip = true
+  # }
 }
