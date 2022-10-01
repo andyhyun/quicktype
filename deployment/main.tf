@@ -16,9 +16,9 @@ provider "aws" {
 }
 
 # define an ECS cluster for quicktype
-resource "aws_ecs_cluster" "quicktype_cluster" {
-  name = "quicktype_cluster"
-}
+# resource "aws_ecs_cluster" "quicktype-cluster" {
+#   name = "quicktype-cluster"
+# }
 
 # define a task for the frontend webserver
 resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
@@ -51,7 +51,7 @@ resource "aws_ecs_service" "quicktype_frontend_webserver_service" {
   name                   = "quicktype_frontend_webserver_service"
   enable_execute_command = true
   launch_type            = "EC2"
-  cluster                = aws_ecs_cluster.quicktype_cluster.id
+  cluster                = "quicktype-cluster"
   task_definition        = aws_ecs_task_definition.quicktype_frontend_webserver.id
   desired_count          = 1
   # network_configuration {
