@@ -28,7 +28,7 @@ resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
   # network_mode             = "awsvpc"
   requires_compatibilities = ["EC2"]
   cpu                      = 1024
-  memory                   = 1024
+  memory                   = 512
 
   container_definitions = jsonencode([
     {
