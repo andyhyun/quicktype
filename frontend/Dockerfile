@@ -25,3 +25,6 @@ COPY docker_resources/nginx.conf /etc/nginx/conf.d/default.conf
 
 # that's it! now you have a docker image that's ready to host your react
 # frontend with a configured nginx webserver
+
+# Added later, trying to get Fargate Public IP to work
+EXPOSE 80
