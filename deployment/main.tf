@@ -23,8 +23,8 @@ resource "aws_ecs_cluster" "quicktype_cluster" {
 # define a task for the frontend webserver
 resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
   family                   = "quicktype_frontend_webserver"
-  task_role_arn            = "arn:aws:iam::186932938567:role/ecsTaskExecutionRole"
-  execution_role_arn       = "arn:aws:iam::186932938567:role/ecsTaskExecutionRole"
+  task_role_arn            = "arn:aws:iam::800636676873:role/ecsTaskExecutionRole"
+  execution_role_arn       = "arn:aws:iam::800636676873:role/ecsTaskExecutionRole"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 256
@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
   container_definitions = jsonencode([
     {
       name      = "frontend_webserver"
-      image     = "186932938567.dkr.ecr.us-east-1.amazonaws.com/frontend_webserver"
+      image     = "800636676873.dkr.ecr.us-east-1.amazonaws.com/frontend_webserver"
       essential = true
       command   = ["nginx", "-g", "daemon off;"]
       portMappings = [
@@ -55,8 +55,10 @@ resource "aws_ecs_service" "quicktype_frontend_webserver_service" {
   task_definition        = aws_ecs_task_definition.quicktype_frontend_webserver.id
   desired_count          = 5
   network_configuration {
-    subnets          = ["subnet-0b8f437d046a9d818"]
-    security_groups  = ["sg-057af67719d0de21b"]
+    # subnets          = ["subnet-0b8f437d046a9d818"]
+    subnets          = ["subnet-01524a7fe6bf7c90d"]
+    # security_groups  = ["sg-057af67719d0de21b"]
+    security_groups  = ["sg-0025bb409aeb1a575"]
     assign_public_ip = true
   }
 }
