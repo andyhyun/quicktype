@@ -16,24 +16,24 @@ provider "aws" {
 }
 
 # define an ECS cluster for quicktype
-# resource "aws_ecs_cluster" "quicktype-cluster" {
-#   name = "quicktype-cluster"
-# }
+resource "aws_ecs_cluster" "quicktype-frontend-cluster" {
+  name = "quicktype-frontend-cluster"
+}
 
 # define a task for the frontend webserver
-resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
-  family                   = "quicktype_frontend_webserver"
+resource "aws_ecs_task_definition" "quicktype-frontend-task-definition" {
+  family                   = "quicktype-frontend-task-definition"
   task_role_arn            = "arn:aws:iam::800636676873:role/ecsTaskExecutionRole"
   execution_role_arn       = "arn:aws:iam::800636676873:role/ecsTaskExecutionRole"
-  # network_mode             = "awsvpc"
-  requires_compatibilities = ["EC2"]
-  cpu                      = 1024
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = 256
   memory                   = 512
 
   container_definitions = jsonencode([
     {
-      name      = "frontend_webserver"
-      image     = "800636676873.dkr.ecr.us-east-1.amazonaws.com/frontend_webserver"
+      name      = "quicktype-frontend-container"
+      image     = "800636676873.dkr.ecr.us-east-1.amazonaws.com/quicktype-frontend"
       essential = true
       command   = ["nginx", "-g", "daemon off;"]
       portMappings = [
@@ -47,18 +47,16 @@ resource "aws_ecs_task_definition" "quicktype_frontend_webserver" {
 }
 
 # define a service, running 5 instances of the frontend webserver
-resource "aws_ecs_service" "quicktype_frontend_webserver_service" {
-  name                   = "quicktype_frontend_webserver_service"
+resource "aws_ecs_service" "quicktype-frontend-service" {
+  name                   = "quicktype-frontend-service"
   enable_execute_command = true
-  launch_type            = "EC2"
-  cluster                = "quicktype-cluster"
-  task_definition        = aws_ecs_task_definition.quicktype_frontend_webserver.id
-  desired_count          = 1
-  # network_configuration {
-  #   # subnets          = ["subnet-0b8f437d046a9d818"]
-  #   subnets          = ["subnet-01524a7fe6bf7c90d"]
-  #   # security_groups  = ["sg-057af67719d0de21b"]
-  #   security_groups  = ["sg-0025bb409aeb1a575"]
-  #   assign_public_ip = true
-  # }
+  launch_type            = "FARGATE"
+  cluster                = aws_ecs_cluster.quicktype-frontend-cluster.id
+  task_definition        = aws_ecs_task_definition.quicktype-frontend-task-definition.id
+  desired_count          = 5
+  network_configuration {
+    subnets          = ["subnet-0b8f437d046a9d818"]
+    security_groups  = ["sg-057af67719d0de21b"]
+    assign_public_ip = true
+  }
 }
