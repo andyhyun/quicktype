@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import {useAuth0} from "@auth0/auth0-react";
 import { useParams } from 'react-router-dom';
 
 const Profile = () => {
   const { id } = useParams();
+  const { user, isAuthenticated } = useAuth0();
 
   const [scores, setScores] = useState([]);
 
@@ -22,7 +24,14 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
+      isAuthenticated && (
+            <article className='column'>
+                {user?.picture && <img src={user.picture} alt={user?.name} />}
+                <h2>{user?.name}</h2>
+                <ul>
+                    {Object.keys(user).map((objKey, i) => <li key={i}>{objKey}: {user[objKey]} </li>)}
+                </ul>
+                 <div>
       <h1>Profile</h1>
       <h2>Past Scores</h2>
       <table>
@@ -42,7 +51,11 @@ const Profile = () => {
         </tbody>
       </table>
     </div>
-  );
+            </article>
+
+        )
+
+  )
 }
 
 export default Profile;
