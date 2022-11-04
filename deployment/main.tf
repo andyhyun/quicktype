@@ -46,20 +46,6 @@ resource "aws_ecs_task_definition" "quicktype-frontend-task-definition" {
   ])
 }
 
-# define a service, running 5 instances of the frontend webserver
-resource "aws_ecs_service" "quicktype-frontend-service" {
-  name                   = "quicktype-frontend-service"
-  enable_execute_command = true
-  launch_type            = "FARGATE"
-  cluster                = aws_ecs_cluster.quicktype-frontend-cluster.id
-  task_definition        = aws_ecs_task_definition.quicktype-frontend-task-definition.id
-  desired_count          = 5
-  network_configuration {
-    subnets          = ["subnet-04543979c75187933"]
-    security_groups  = ["sg-0d4fb5f077b4a953d"]
-    assign_public_ip = true
-  }
-}
 
 # define a load balancer
 resource "aws_lb" "quicktype-frontend-lb" {
@@ -73,11 +59,49 @@ resource "aws_lb" "quicktype-frontend-lb" {
 
 # define a listener
 resource "aws_lb_listener" "alb-listener" {
-  load_balancer_arn = "arn:aws:elasticloadbalancing:us-east-1:800636676873:loadbalancer/app/quicktype-frontend-lb/9ceb532550000d9a"
+  load_balancer_arn = aws_lb.quicktype-frontend-lb.arn
   port              = 443
-  protocol          = "HTTP"
+  protocol          = "HTTPS"
+  certificate_arn = "arn:aws:acm:us-east-1:800636676873:certificate/0bf15554-6f13-4f60-8dd5-c26c5cfc822c"
   default_action {
-    target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:800636676873:targetgroup/quicktype-frontend-tg/09fff9b54d39cbb5"
+    target_group_arn = aws_lb_target_group.test.arn
     type             = "forward"
+  }
+}
+
+resource "aws_lb_target_group" "test" {
+  name     = "test-targetGroup"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = "vpc-08a5c64d5a633b579"
+  target_type = "ip"
+  depends_on = [
+    aws_lb.quicktype-frontend-lb
+  ]
+}
+
+resource "aws_lb_target_group_attachment" "tg_attachment_test1" {
+    target_group_arn = aws_lb_target_group.test.arn
+    target_id = "172.31.94.30"
+    port = 80
+}
+
+# define a service, running 1 instances of the frontend webserver
+resource "aws_ecs_service" "quicktype-frontend-service" {
+  name                   = "quicktype-frontend-service"
+  enable_execute_command = true
+  launch_type            = "FARGATE"
+  cluster                = aws_ecs_cluster.quicktype-frontend-cluster.id
+  task_definition        = aws_ecs_task_definition.quicktype-frontend-task-definition.id
+  desired_count          = 1
+  network_configuration {
+    subnets          = ["subnet-04543979c75187933"]
+    security_groups  = ["sg-0d4fb5f077b4a953d"]
+    assign_public_ip = true
+  }
+  load_balancer {
+    target_group_arn = aws_lb_target_group.test.arn
+    container_name   = "quicktype-frontend-container"
+    container_port   = 80
   }
 }
