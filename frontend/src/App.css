@@ -43,5 +43,43 @@
 body {
   display: flex;
   justify-content: center;
-  font-size: 48px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  width: 600px;
+  height: 75vh;
+  font-family: 'Roboto Mono', monospace;
+  font-size: large;
+}
+
+.radio-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.prompt {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 8px;
+}
+
+.controls {
+  display: flex;
+  gap: 4px;
+}
+
+.controls input {
+  flex: 4;
+  font-family: 'Roboto Mono', monospace;
+  font-size: large;
+}
+
+.controls button {
+  flex: 1;
+  font-family: 'Roboto Mono', monospace;
+  font-size: large;
 }

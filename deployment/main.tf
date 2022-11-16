@@ -208,6 +208,7 @@ resource "aws_lb_target_group" "quicktype_backend_lb_target_group" {
   vpc_id      = data.aws_vpc.default_vpc.id
   target_type = "instance"
   health_check {
+    path = "/api/test"
     port = 8080
   }
   depends_on = [
