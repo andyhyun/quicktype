@@ -261,6 +261,8 @@ resource "aws_ecs_service" "quicktype_frontend_ecs_service" {
   cluster                = aws_ecs_cluster.quicktype_cluster.id
   task_definition        = aws_ecs_task_definition.quicktype_frontend_task_definition.id
   desired_count          = 1
+  deployment_maximum_percent = 100
+  deployment_minimum_healthy_percent = 0
   load_balancer {
     target_group_arn = aws_lb_target_group.quicktype_frontend_lb_target_group.arn
     container_name   = "quicktype-frontend"
@@ -276,6 +278,8 @@ resource "aws_ecs_service" "quicktype_backend_ecs_service" {
   cluster                = aws_ecs_cluster.quicktype_cluster.id
   task_definition        = aws_ecs_task_definition.quicktype_backend_task_definition.id
   desired_count          = 1
+  deployment_maximum_percent = 100
+  deployment_minimum_healthy_percent = 0
   load_balancer {
     target_group_arn = aws_lb_target_group.quicktype_backend_lb_target_group.arn
     container_name   = "quicktype-backend"
