@@ -25,14 +25,15 @@ const Profile = () => {
 
   return (
     isAuthenticated && (
+
       <article className='column'>
+          <h1>Profile</h1>
         {user?.picture && <img src={user.picture} alt={user?.name} />}
-        <h2>{user?.name}</h2>
         <ul>
-          {Object.keys(user).map((objKey, i) => <li key={i}>{objKey}: {user[objKey]} </li>)}
+             <li >email: {user?.email}</li>
+             <li>QuickType Username: {user['quicktype username']}</li>
         </ul>
         <div>
-          <h1>Profile</h1>
           <h2>Past Scores</h2>
           {/* <table>
             <thead>
