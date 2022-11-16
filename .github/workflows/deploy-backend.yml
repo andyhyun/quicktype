@@ -24,7 +24,7 @@
 #    See the documentation for each action used below for the recommended IAM policies for this IAM user,
 #    and best practices on handling the access key credentials.
 
-name: Deploy Frontend to Amazon ECS
+name: Deploy Backend to Amazon ECS
 
 on:
   push:
@@ -32,12 +32,12 @@ on:
 
 env:
   AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: quicktype-frontend           # set this to your Amazon ECR repository name
-  ECS_SERVICE: quicktype-frontend-ecs-service                 # set this to your Amazon ECS service name
+  ECR_REPOSITORY: quicktype-backend           # set this to your Amazon ECR repository name
+  ECS_SERVICE: quicktype-backend-ecs-service                 # set this to your Amazon ECS service name
   ECS_CLUSTER: quicktype-cluster                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: task-definition.json # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: quicktype-frontend           # set this to the name of the container in the
+  CONTAINER_NAME: quicktype-backend           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 permissions:
@@ -65,7 +65,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
-      working-directory: ./frontend
+      working-directory: ./backend
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -79,9 +79,9 @@ jobs:
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
         
     - name: Download task definition
-      # Set 'quicktype-frontend-task-definition' to the name of your Amazon ECS task definition
+      # Set 'quicktype-backend-task-definition' to the name of your Amazon ECS task definition
       run: |
-        aws ecs describe-task-definition --task-definition quicktype-frontend-task-definition --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition quicktype-backend-task-definition --query taskDefinition > task-definition.json
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
