@@ -41,21 +41,19 @@ const Game = () => {
   }, [phase]);
   
   const handleKeyDown = (e) => {
-    if (phase === 0 && combineStringAndKey(e.target.value, e.key, e.ctrlKey, e.altKey).length !== 0) setPhase(1);
+    if (phase === 0 && e.target.value.length > 0) setPhase(1);
     if (currentWordIndex >= gameLength) return;
 
-    if (e.key === ' ' && e.target.value.length < promptWords[currentWordIndex].length && e.target.value !== '') {
-      e.target.style.backgroundColor = 'red';
-    } else if (wordStartIsSame(combineStringAndKey(e.target.value, e.key, e.ctrlKey, e.altKey), promptWords[currentWordIndex])) {
+    if (wordStartIsSame(e.target.value, promptWords[currentWordIndex])) {
       e.target.style.backgroundColor = 'white';
     } else {
       e.target.style.backgroundColor = 'red';
     }
 
-    if (e.key === ' ' && e.target.value === '') {
+    if ((e.key === ' ' || e.target.value.charAt(e.target.value.length - 1) === ' ') && e.target.value === '') {
       // Pressing space with nothing in text input
       e.preventDefault();
-    } else if (e.key === ' ' && e.target.value === promptWords[currentWordIndex]) {
+    } else if ((e.key === ' ' || e.target.value.charAt(e.target.value.length - 1) === ' ') && e.target.value.trimEnd() === promptWords[currentWordIndex]) {
       // Pressing space when word is typed correctly
       e.preventDefault();
       e.target.value = '';
@@ -63,7 +61,7 @@ const Game = () => {
       setCurrentWordIndex(currentWordIndex + 1);
     } else if (
       currentWordIndex === gameLength - 1
-      && promptWords[currentWordIndex] === combineStringAndKey(e.target.value, e.key, e.ctrlKey, e.altKey)
+      && promptWords[currentWordIndex] === e.target.value
     ) {
       // Handle the game ending here
       e.preventDefault();
@@ -114,6 +112,7 @@ const Game = () => {
         <input
           type='text'
           onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyDown}
           autoFocus
         />
         <button type='button' onClick={handleRedo}>redo</button>

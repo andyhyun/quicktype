@@ -29,7 +29,9 @@ export const createRandomPrompt = (numWords) => {
 }
 
 export const wordStartIsSame = (str, reference) => {
-  if (str.length > reference.length) {
+  if (str.trimEnd() === reference) {
+    return true;
+  } else if (str.length > reference.length) {
     return false;
   }
 
