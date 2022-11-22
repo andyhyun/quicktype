@@ -87,35 +87,37 @@ const Game = () => {
   }
 
   return (
-    <div className='container' key={gameKey}>
-      <div className='radio-buttons'>
-        <div>
-          <input type='radio' name='length' id='10' value='10' onChange={handleChange} />
-          <label htmlFor='10'>10</label>
+    <div className='game-body'>
+      <div className='container' key={gameKey}>
+        <div className='radio-buttons'>
+          <div>
+            <input type='radio' name='length' id='10' value='10' onChange={handleChange} />
+            <label htmlFor='10'>10</label>
+          </div>
+          <div>
+            <input type='radio' name='length' id='25' value='25' onChange={handleChange} />
+            <label htmlFor='25'>25</label>
+          </div>
+          <div>
+            <input type='radio' name='length' id='50' value='50' onChange={handleChange} />
+            <label htmlFor='50'>50</label>
+          </div>
+          <div>
+            <input type='radio' name='length' id='100' value='100' onChange={handleChange} />
+            <label htmlFor='100'>100</label>
+          </div>
         </div>
-        <div>
-          <input type='radio' name='length' id='25' value='25' onChange={handleChange} />
-          <label htmlFor='25'>25</label>
+        <div className='stats'>{wpm} WPM</div>
+        <div ref={promptEl} className='prompt'>{promptDivs}</div>
+        <div className='controls'>
+          <input
+            type='text'
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleKeyDown}
+            autoFocus
+          />
+          <button type='button' onClick={handleRedo}>redo</button>
         </div>
-        <div>
-          <input type='radio' name='length' id='50' value='50' onChange={handleChange} />
-          <label htmlFor='50'>50</label>
-        </div>
-        <div>
-          <input type='radio' name='length' id='100' value='100' onChange={handleChange} />
-          <label htmlFor='100'>100</label>
-        </div>
-      </div>
-      <div className='stats'>{wpm} WPM</div>
-      <div ref={promptEl} className='prompt'>{promptDivs}</div>
-      <div className='controls'>
-        <input
-          type='text'
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyDown}
-          autoFocus
-        />
-        <button type='button' onClick={handleRedo}>redo</button>
       </div>
     </div>
   );

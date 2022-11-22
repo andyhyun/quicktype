@@ -40,7 +40,7 @@
 /* Everything below is mine */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-body {
+.game-body {
   display: flex;
   justify-content: center;
 }
@@ -50,7 +50,7 @@ body {
   justify-content: center;
   flex-direction: column;
   gap: 4px;
-  width: 100%;
+  max-width: 600px;
   height: 75vh;
   font-family: 'Roboto Mono', monospace;
   font-size: large;
