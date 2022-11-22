@@ -32,9 +32,9 @@ button {
 }
 
 img {
-    width: 200px;
+    width: 100px;
     border: 0.5rem double #000;
-    border-radius: 50%;
+    border-radius: 100%;
     margin: 0 1rem 1rem;
 }
 

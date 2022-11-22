@@ -5,7 +5,6 @@ import Game from "./components/Game";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
-import { ReactComponent as logo } from "./logo.svg"
 
 import './App.css';
 
@@ -13,7 +12,7 @@ import './App.css';
 export default function Navbar() {
     const { isLoading, error } = useAuth0();
     return <nav className="nav">
-        <a href={"/"} className={"logo"}><logo/></a>
+        <a href={"/"} className={"logo"}><img src="qtlogo.png" alt="logo"></img></a>
         <a href={"/"} className={"site-title"}>QuickType</a>
         <ul>
             <li>
