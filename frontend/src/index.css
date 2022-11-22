@@ -12,12 +12,12 @@ html {
 
 main {
   padding: 1rem;
-  min-height: 100vh;
+  min-height: fit-content;
 }
 
 article {
   font-size: 1.2rem;
-  width: 90%;
+  width: 100%;
   margin: 1rem;
 }
 
@@ -28,6 +28,7 @@ button {
   /* padding: 0.5em 1.5em; */
   cursor: pointer;
   border-radius: 0.5rem;
+
 }
 
 img {

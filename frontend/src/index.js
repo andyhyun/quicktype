@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { BrowserRouter, useNavigate } from 'react-router-dom';
+import './styles.css'
 
 const domain = process.env.REACT_APP_QUICKTYPE_DOMAIN;
 const clientId = process.env.REACT_APP_QUICKTYPE_CLIENT_ID;
