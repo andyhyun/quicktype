@@ -12,8 +12,7 @@ import './App.css';
 export default function Navbar() {
     const { isLoading, error } = useAuth0();
     return <nav className="nav">
-        <a href={"/"} className={"logo"}><img src="qtlogo.png" alt="logo"></img></a>
-        <a href={"/"} className={"site-title"}>QuickType</a>
+        <a href={"/"} className={"site-title"}><img src="qtlogo.png" alt="logo" className={"logo"}></img>QuickType</a>
         <ul>
             <li>
                 <a href={"/leaderboard"}>Leaderboard</a>

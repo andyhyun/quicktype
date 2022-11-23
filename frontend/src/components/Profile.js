@@ -28,7 +28,7 @@ const Profile = () => {
 
       <article className='column'>
           <h1>Profile</h1>
-        {user?.picture && <img src={user.picture} alt={user?.name} />}
+        {user?.picture && <img src={user.picture} alt={user?.name} className={"profilePic"}/>}
         <ul>
              <li >email: {user?.email}</li>
              <li>QuickType Username: {user['quicktype username']}</li>
