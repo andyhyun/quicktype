@@ -1,7 +1,7 @@
 import {Route} from "react-router-dom";
 import Leaderboard from "./components/Leaderboard";
 import Profile from "./components/Profile";
-import Game from "./components/Game";
+import Game from "./components/Game/Game";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';

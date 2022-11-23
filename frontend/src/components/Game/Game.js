@@ -1,5 +1,7 @@
+import './Game.css'
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { createRandomPrompt, wordStartIsSame, combineStringAndKey } from '../util/gameUtil'
+import { createRandomPrompt, wordStartIsSame, formatAuth0Sub } from '../../util/gameUtil'
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Game = () => {
   const [gameLength, setGameLength] = useState(10);
@@ -10,6 +12,16 @@ const Game = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   const promptEl = useRef(null);
+  const tenEl = useRef(null);
+  const twentyFiveEl = useRef(null);
+  const fiftyEl = useRef(null);
+  const oneHundredEl = useRef(null);
+
+  const { isAuthenticated, user } = useAuth0();
+
+  const [promptWords, promptDivs] = useMemo(() => {
+    return createRandomPrompt(gameLength)
+  }, [gameLength, gameKey]);
 
   const handleSubmit = async (data) => {
     try {
@@ -25,20 +37,35 @@ const Game = () => {
     }
   }
 
-  const [promptWords, promptDivs] = useMemo(() => {
-    return createRandomPrompt(gameLength)
-  }, [gameLength, gameKey]);
-
   useEffect(() => {
     if (phase === 1) {
       setStartTime(performance.now());
     } else if (phase === 2) {
-      handleSubmit({
-        wpm: wpm,
-        userId: Math.floor(Math.random() * 5 + 1)
-      });
+      if (isAuthenticated) {
+        handleSubmit({
+          score: wpm,
+          length: gameLength,
+          userId: formatAuth0Sub(user.sub)
+        });
+      }
     }
   }, [phase]);
+
+  useEffect(() => {
+    switch (gameLength) {
+      case 25:
+        twentyFiveEl.current.style.backgroundColor = 'lightgray';
+        break;
+      case 50:
+        fiftyEl.current.style.backgroundColor = 'lightgray';
+        break;
+      case 100:
+        oneHundredEl.current.style.backgroundColor = 'lightgray';
+        break;
+      default:
+        tenEl.current.style.backgroundColor = 'lightgray';
+    }
+  }, [gameLength, gameKey]);
   
   const handleKeyDown = (e) => {
     if (phase === 0 && e.target.value.length > 0) setPhase(1);
@@ -90,19 +117,19 @@ const Game = () => {
     <div className='game-body'>
       <div className='container' key={gameKey}>
         <div className='radio-buttons'>
-          <div>
+          <div ref={tenEl}>
             <input type='radio' name='length' id='10' value='10' onChange={handleChange} />
             <label htmlFor='10'>10</label>
           </div>
-          <div>
+          <div ref={twentyFiveEl}>
             <input type='radio' name='length' id='25' value='25' onChange={handleChange} />
             <label htmlFor='25'>25</label>
           </div>
-          <div>
+          <div ref={fiftyEl}>
             <input type='radio' name='length' id='50' value='50' onChange={handleChange} />
             <label htmlFor='50'>50</label>
           </div>
-          <div>
+          <div ref={oneHundredEl}>
             <input type='radio' name='length' id='100' value='100' onChange={handleChange} />
             <label htmlFor='100'>100</label>
           </div>

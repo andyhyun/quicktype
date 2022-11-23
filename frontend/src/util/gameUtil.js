@@ -42,6 +42,14 @@ export const removeLastWord = (str) => {
   return str.substring(0, str.trim().lastIndexOf(' ') + 1);
 }
 
+export const formatAuth0Sub = (str) => {
+  if (str.includes('|')) {
+    return str.substring(str.indexOf('|') + 1);
+  }
+
+  return str;
+}
+
 export const combineStringAndKey = (str, key, ctrlPressed, altPressed) => {
   if (key === 'Backspace') {
     if (ctrlPressed) {

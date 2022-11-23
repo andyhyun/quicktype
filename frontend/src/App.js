@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import Leaderboard from './components/Leaderboard';
 import Profile from './components/Profile';
-import Game from './components/Game';
+import Game from './components/Game/Game';
 import Navbar from "./Navbar";
 
 const ProtectedRoute = ({ component, ...args }) => {
