@@ -50,6 +50,18 @@ export const formatAuth0Sub = (str) => {
   return str;
 }
 
+export const setGameLengthHelper = (len) => {
+  switch (parseInt(len)) {
+    case 10:
+    case 25:
+    case 50:
+    case 100:
+      return parseInt(len);
+    default:
+      return 10;
+  }
+}
+
 export const combineStringAndKey = (str, key, ctrlPressed, altPressed) => {
   if (key === 'Backspace') {
     if (ctrlPressed) {
