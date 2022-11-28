@@ -10,7 +10,7 @@ import {
 import Leaderboard from './components/Leaderboard';
 import Profile from './components/Profile';
 import Game from './components/Game/Game';
-import Navbar from "./Navbar";
+import Navbar from './components/Nav/Navbar';
 
 const ProtectedRoute = ({ component, ...args }) => {
   const Component = withAuthenticationRequired(component, args);
@@ -21,7 +21,7 @@ function App() {
   const { isLoading, error } = useAuth0();
   return (
 
-    <div>
+    <div className="App">
         <Navbar />
       <Routes>
         <Route path='/' element={<div>quicktype</div>}></Route>
