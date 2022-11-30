@@ -7,7 +7,7 @@ const Nav = styled.nav`
   height: 55px;
   border-bottom: 2px solid #f1f1f1;
   padding: 0 10px;
-  background-color: #ff0000;
+  background-color: #152932;
   display: flex;
   justify-content: space-between;
   .nav {
@@ -18,7 +18,7 @@ const Nav = styled.nav`
     padding: 0 1rem;
   }
   .nav a {
-    color: inherit;
+    color: white;
     text-decoration: none;
     height: 100%;
     display: flex;
@@ -27,10 +27,8 @@ const Nav = styled.nav`
 }
 .site-title {
     font-size: 2rem;
-
 }
 .logo {
-    border: 0.5rem double #000;
     max-width:  50px;
     max-height: 50px;
 }
@@ -40,7 +38,6 @@ const Navbar = () => {
   return (
     <Nav>
       <div className={"nav"}>
-
           <a href={"/"} className={"site-title"}><img src="qtlogo.png" alt="logo" className={"logo"}/>QuickType</a>
       </div>
       <Burger />

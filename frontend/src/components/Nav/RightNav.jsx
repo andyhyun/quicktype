@@ -16,7 +16,7 @@ const Ul = styled.ul`
     padding: 18px 10px;
   }
   a {
-    color: inherit;
+    color: white;
     text-decoration: none;
     height: 100%;
     display: flex;
