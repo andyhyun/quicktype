@@ -12,7 +12,7 @@ const Leaderboard = () => {
 
   const getScores = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/scores/${gameLength}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/scores/${gameLength}`);
       const jsonData = await response.json();
 
       setScores(jsonData);

@@ -21,7 +21,7 @@ const Game = () => {
 
   const handleSubmit = async (data) => {
     try {
-      await fetch("http://localhost:8080/api/scores", {
+      await fetch(`${process.env.REACT_APP_API_URL}/api/scores`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -38,11 +38,11 @@ const Game = () => {
       setStartTime(performance.now());
     } else if (phase === 2) {
       if (isAuthenticated) {
-        handleSubmit({
+        handleSubmit([{
           score: wpm,
           length: gameLength,
           userId: formatAuth0Sub(user.sub)
-        });
+        }]);
       }
     }
   }, [phase]);

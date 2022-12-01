@@ -10,7 +10,7 @@ const Profile = () => {
 
   const getScores = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/users/${formatAuth0Sub(user.sub)}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/${formatAuth0Sub(user.sub)}`);
       const jsonData = await response.json();
 
       setScores(jsonData);
