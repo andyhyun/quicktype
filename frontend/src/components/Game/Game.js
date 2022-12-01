@@ -3,6 +3,8 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { createRandomPrompt, wordStartIsSame, formatAuth0Sub, setGameLengthHelper } from '../../util/gameUtil'
 import { useAuth0 } from '@auth0/auth0-react';
 
+const apiURL = process.env.REACT_APP_API_URL || 'https://www.quicktype.app';
+
 const Game = () => {
   const [gameLength, setGameLength] = useState(setGameLengthHelper(localStorage.getItem('gameLength')));
   const [gameKey, setGameKey] = useState(true);
@@ -21,7 +23,7 @@ const Game = () => {
 
   const handleSubmit = async (data) => {
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/api/scores`, {
+      await fetch(`${apiURL}/api/scores`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

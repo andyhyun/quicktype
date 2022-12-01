@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {useAuth0} from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
-import { formatAuth0Sub } from '../util/gameUtil'
+import { formatAuth0Sub } from '../util/gameUtil';
+
+const apiURL = process.env.REACT_APP_API_URL || 'https://www.quicktype.app';
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -10,7 +12,7 @@ const Profile = () => {
 
   const getScores = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/${formatAuth0Sub(user.sub)}`);
+      const response = await fetch(`${apiURL}/api/users/${formatAuth0Sub(user.sub)}`);
       const jsonData = await response.json();
 
       setScores(jsonData);

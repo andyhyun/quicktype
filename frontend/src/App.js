@@ -14,6 +14,8 @@ import Navbar from './components/Nav/Navbar';
 import { formatAuth0Sub } from './util/gameUtil';
 import { useEffect } from 'react';
 
+const apiURL = process.env.REACT_APP_API_URL || 'https://www.quicktype.app';
+
 const ProtectedRoute = ({ component, ...args }) => {
   const Component = withAuthenticationRequired(component, args);
   return <Component />;
@@ -24,7 +26,7 @@ function App() {
   
   const handleSubmit = async (data) => {
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/api/users`, {
+      await fetch(`${apiURL}/api/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

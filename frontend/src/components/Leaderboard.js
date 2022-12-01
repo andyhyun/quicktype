@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 
+const apiURL = process.env.REACT_APP_API_URL || 'https://www.quicktype.app';
+
 const Leaderboard = () => {
   const [leaderboardKey, setLeaderboardKey] = useState(true);
   const [scores, setScores] = useState([]);
@@ -12,7 +14,7 @@ const Leaderboard = () => {
 
   const getScores = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/scores/${gameLength}`);
+      const response = await fetch(`${apiURL}/api/scores/${gameLength}`);
       const jsonData = await response.json();
 
       setScores(jsonData);
