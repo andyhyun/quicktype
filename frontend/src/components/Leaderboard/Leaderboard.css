@@ -1,0 +1,100 @@
+table {
+  table-layout: fixed;
+  min-width: 300px;
+  width: 500px;
+  border-spacing: 0;
+}
+
+th, td {
+  height: 2.5rem;
+}
+
+thead {
+  color: white;
+}
+
+thead tr {
+  background-color: transparent !important;
+}
+
+th.rank-col {
+  background-color: #152932;
+  border-top-left-radius: 1rem;
+  border-right: 1px solid black;
+  width: 3rem;
+}
+
+thead th:nth-child(2) {
+  background-color: #152932;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+thead th:last-of-type {
+  background-color: #152932;
+  border-top-right-radius: 1rem;
+  border-left: 1px solid black;
+}
+
+tbody td {
+  border-top: 2px solid black;
+}
+
+tbody td:first-of-type {
+  border-left: 2px solid black;
+  border-right: 1px solid black;
+}
+
+tbody td:nth-child(2) {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+tbody td:last-of-type {
+  border-left: 1px solid black;
+  border-right: 2px solid black;
+}
+
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 1rem;
+  border-right: 1px solid black;
+  border-bottom: 2px solid black;
+}
+
+tr:last-of-type td:nth-child(2) {
+  border-left: 1px solid black;
+  border-bottom: 2px solid black;
+}
+
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 1rem;
+  border-left: 1px solid black;
+  border-bottom: 2px solid black;
+}
+
+.even td {
+  background-color: #e1ebee;
+}
+
+.odd td {
+  background-color: #b4e4d9;
+}
+
+.leaderboard-body {
+  display: flex;
+  justify-content: center;
+}
+
+.leaderboard-body .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  min-width: 300px;
+  width: 500px;
+  margin-top: 5vh;
+  font-family: 'Roboto Mono', monospace;
+  font-size: larger;
+  overflow-x: auto;
+}

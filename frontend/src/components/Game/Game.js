@@ -15,7 +15,7 @@ const Game = () => {
 
   const promptEl = useRef(null);
 
-  const { isAuthenticated, user } = useAuth0();
+  const { loginWithRedirect, isLoading, isAuthenticated, user } = useAuth0();
 
   const [promptWords, promptDivs] = useMemo(() => {
     return createRandomPrompt(gameLength)
@@ -99,6 +99,9 @@ const Game = () => {
   return (
     <div className='game-body'>
       <div className='container' key={gameKey}>
+        {!isLoading && !isAuthenticated && (
+          <div className="message"><span onClick={() => loginWithRedirect()}>Sign in</span> or <span onClick={() => loginWithRedirect()}>register</span> to record your scores and compete on the leaderboards!</div>
+        )}
         <div className='top-bar'>
           <div className='length-select'>
             <div># of words:</div>

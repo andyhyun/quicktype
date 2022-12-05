@@ -1,0 +1,117 @@
+table {
+  table-layout: fixed;
+  min-width: 300px;
+  width: 500px;
+  border-spacing: 0;
+}
+
+th, td {
+  height: 2.5rem;
+}
+
+thead {
+  color: white;
+}
+
+thead tr {
+  background-color: transparent !important;
+}
+
+thead th:first-of-type {
+  background-color: #152932;
+  border-top-left-radius: 1rem;
+  border-right: 1px solid black;
+}
+
+thead th:last-of-type {
+  background-color: #152932;
+  border-top-right-radius: 1rem;
+  border-left: 1px solid black;
+}
+
+tbody td {
+  border-top: 2px solid black;
+}
+
+tbody td:first-of-type {
+  border-left: 2px solid black;
+  border-right: 1px solid black;
+}
+
+tbody td:last-of-type {
+  border-left: 1px solid black;
+  border-right: 2px solid black;
+}
+
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 1rem;
+  border-right: 1px solid black;
+  border-bottom: 2px solid black;
+}
+
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 1rem;
+  border-left: 1px solid black;
+  border-bottom: 2px solid black;
+}
+
+.even td {
+  background-color: #e1ebee;
+}
+
+.odd td {
+  background-color: #b4e4d9;
+}
+
+.profile-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-body .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 5vh;
+  font-family: 'Roboto Mono', monospace;
+  font-size: larger;
+  overflow-x: auto;
+}
+
+.user-info {
+  background-color: #e1ebee;
+  border: 2px solid black;
+  border-radius: 1rem;
+  padding: 50px;
+  min-width: 400px;
+  width: 500px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profilePic {
+  width: 100px;
+  border-radius: 100%;
+  border: 2px solid black;
+}
+
+.username {
+  font-size: xx-large;
+  font-weight: 700;
+}
+
+.user-info img {
+  flex: 1;
+}
+
+.user-info ul{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 3;
+}

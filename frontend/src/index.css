@@ -31,13 +31,6 @@ button {
 
 }
 
-.profilePic {
-    width: 100px;
-    border: 0.5rem double #000;
-    border-radius: 100%;
-    margin: 0 1rem 1rem;
-}
-
 .column {
   display: flex;
   flex-direction: column;

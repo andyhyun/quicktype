@@ -7,8 +7,8 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-import Leaderboard from './components/Leaderboard';
-import Profile from './components/Profile';
+import Leaderboard from './components/Leaderboard/Leaderboard';
+import Profile from './components/Profile/Profile';
 import Game from './components/Game/Game';
 import Navbar from './components/Nav/Navbar';
 import { formatAuth0Sub } from './util/gameUtil';
@@ -51,10 +51,10 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path='/' element={<div>quicktype</div>}></Route>
+        <Route path='/' element={<Game />}></Route>
         <Route path='/leaderboard' element={<Leaderboard />}></Route>
         <Route path='/profile' element={<ProtectedRoute component={Profile} />}></Route>
-        <Route path='/game' element={<Game />}></Route>
+        {/* <Route path='/game' element={<Game />}></Route> */}
       </Routes>
     </div>
   );
