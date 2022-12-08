@@ -53,7 +53,7 @@ app.get('/api/users/:userid', (req, res) => {
   const articles = [];
   const fetchid = req.params.userid;
   connection.query(
-    'SELECT AVG(score) avg_score, length FROM scores WHERE user_id = ? GROUP BY length; SELECT score, length, date_set FROM scores WHERE user_id = ? ORDER BY date_set DESC LIMIT 10',
+    'SELECT AVG(score) avg_score, length FROM scores WHERE user_id = ? GROUP BY length ORDER by length; SELECT score, length, date_set FROM scores WHERE user_id = ? ORDER BY date_set DESC LIMIT 10',
     [fetchid, fetchid],
     function(err, results, fields) {
       if (err) {
