@@ -83,6 +83,7 @@ tr:last-of-type td:last-of-type {
 .leaderboard-body {
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .leaderboard-body .container {

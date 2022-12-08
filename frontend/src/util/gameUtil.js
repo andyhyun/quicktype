@@ -50,6 +50,13 @@ export const formatAuth0Sub = (str) => {
   return str;
 }
 
+export const formatAverageWpm = (avgScore) => {
+  return parseFloat(avgScore).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
 export const setGameLengthHelper = (len) => {
   switch (parseInt(len)) {
     case 10:

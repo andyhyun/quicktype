@@ -21,7 +21,8 @@ const connection = mysql.createConnection({
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
+  database: process.env.DB_DATABASE,
+  multipleStatements: true
 });
 
 app.get('/api/test', (req, res) => {
@@ -52,13 +53,17 @@ app.get('/api/users/:userid', (req, res) => {
   const articles = [];
   const fetchid = req.params.userid;
   connection.query(
-    'SELECT score,length,date_set FROM scores WHERE user_id = ? ORDER BY date_set DESC LIMIT 10;',fetchid ,
+    'SELECT AVG(score) avg_score, length FROM scores WHERE user_id = ? GROUP BY length; SELECT score, length, date_set FROM scores WHERE user_id = ? ORDER BY date_set DESC LIMIT 10',
+    [fetchid, fetchid],
     function(err, results, fields) {
-      if (err){
+      if (err) {
         console.log(err);
-      } else{
-        var data=JSON.parse(JSON.stringify(results));
-        res.send(data);
+      } else {
+        let data = [];
+        data.push(results[0]);
+        data.push(results[1]);
+        console.log('Retrieved profile data');
+        res.json(data);
       }
     }
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Burger from './Burger';
 
@@ -38,7 +39,8 @@ const Navbar = () => {
   return (
     <Nav>
       <div className={"nav"}>
-          <a href={"/"} className={"site-title"}><img src="qtlogo.png" alt="logo" className={"logo"}/>QuickType</a>
+        <Link to={'/'} className={"site-title"}><img src="qtlogo.png" alt="logo" className={"logo"}/>QuickType</Link>
+        {/* <a href={"/"} className={"site-title"}><img src="qtlogo.png" alt="logo" className={"logo"}/>QuickType</a> */}
       </div>
       <Burger />
     </Nav>

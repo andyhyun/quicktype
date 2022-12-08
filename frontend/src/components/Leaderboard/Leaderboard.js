@@ -1,6 +1,6 @@
 import './Leaderboard.css';
 import React, { useEffect, useState, useRef } from 'react';
-import { setGameLengthHelper } from '../../util/gameUtil';
+import { setGameLengthHelper, formatAverageWpm } from '../../util/gameUtil';
 
 const apiURL = process.env.REACT_APP_API_URL || 'https://www.quicktype.app';
 
@@ -37,7 +37,7 @@ const Leaderboard = () => {
   return (
     <div className="leaderboard-body">
       <div className="container" key={leaderboardKey}>
-        <h1>Leaderboard</h1>
+        <h1>Top 10 Leaderboards</h1>
         <div className='length-select'>
           <div># of words:</div>
           <div className='radio-buttons'>
@@ -64,7 +64,7 @@ const Leaderboard = () => {
             <tr>
               <th className='rank-col'>#</th>
               <th>Username</th>
-              <th>WPM</th>
+              <th>Average WPM</th>
             </tr>
           </thead>
           <tbody>
@@ -72,9 +72,16 @@ const Leaderboard = () => {
               <tr className={(i % 2 === 0) ? 'even' : 'odd'} key={i}>
                 <td key={i + 'rank'}>{i + 1}</td>
                 <td key={i + 'username'}>{score.username}</td>
-                <td key={i + 'avg_score'}>{score.avg_score}</td>
+                <td key={i + 'avg_score'}>{formatAverageWpm(score.avg_score)}</td>
               </tr>
             ))}
+            {scores.length === 0 && (
+              <tr className={'even'}>
+                <td>1</td>
+                <td>--</td>
+                <td>--</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

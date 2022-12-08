@@ -9,7 +9,7 @@ const Game = () => {
   const [gameLength, setGameLength] = useState(setGameLengthHelper(localStorage.getItem('gameLength')));
   const [gameKey, setGameKey] = useState(true);
   const [startTime, setStartTime] = useState(0);
-  const [wpm, setWpm] = useState(0);
+  const [wpm, setWpm] = useState('--');
   const [phase, setPhase] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
@@ -92,7 +92,7 @@ const Game = () => {
     setGameKey(!gameKey);
     setCurrentWordIndex(0);
     setStartTime(0);
-    setWpm(0);
+    setWpm('--');
     setPhase(0);
   }
 

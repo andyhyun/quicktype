@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Route} from "react-router-dom";
+import {Route, Link} from "react-router-dom";
 import Leaderboard from "../Leaderboard/Leaderboard";
 import Profile from "../Profile/Profile";
 import Game from "../Game/Game";
@@ -45,10 +45,12 @@ const RightNav = ({ open }) => {
    const { isLoading, error } = useAuth0();
     return (
     <Ul open={open}>
-      <li><a href={"/"}>Game</a></li>
+      <li><Link to={'/'}>Game</Link></li>
+      <li><Link to={'/leaderboard'}>Leaderboard</Link></li>
+      <li><Link to={'/profile'}>Profile</Link></li>
+      {/* <li><a href={"/"}>Game</a></li>
       <li><a href={"/leaderboard"}>Leaderboard</a></li>
-      <li><a href={"/profile"}>Profile</a></li>
-      {/* <li><a href={"/game"}>Game</a></li> */}
+      <li><a href={"/profile"}>Profile</a></li> */}
       <main className='column'>
         {error && <p>Authentication Error</p>}
         {!error && isLoading && <p>Loading...</p>}
