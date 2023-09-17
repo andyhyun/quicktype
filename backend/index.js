@@ -7,10 +7,21 @@ const db = require('./queries');
 const app = express();
 const port = process.env.PORT || 8080;
 
+let whitelist = ['https://quicktype.app', 'https://www.quicktype.app'];
+if (process.env.FRONTEND_URL) {
+  whitelist.push(process.env.FRONTEND_URL);
+}
+
 dotenv.config();
 app.use(bodyParser.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 
 app.get('/api/healthcheck', (request, response) => {
