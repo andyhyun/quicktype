@@ -72,9 +72,9 @@ const addScore = async (request, response) => {
 
   try {
     const query = `
-    INSERT INTO scores (score, length, user_id)
-    VALUES ($1, $2, $3)
-    RETURNING *;
+      INSERT INTO scores (score, length, user_id)
+      VALUES ($1, $2, $3)
+      RETURNING *;
     `;
     const values = [score, length, userId];
     const result = await pool.query(query, values);
