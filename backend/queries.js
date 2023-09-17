@@ -14,7 +14,7 @@ const addUser = async (request, response) => {
   const {
     userId,
     username,
-  } = request.body[0];
+  } = request.body;
 
   try {
     const query = `
@@ -68,7 +68,7 @@ const addScore = async (request, response) => {
     score,
     length,
     userId,
-  } = request.body[0];
+  } = request.body;
 
   try {
     const query = `

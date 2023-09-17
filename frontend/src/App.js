@@ -40,10 +40,10 @@ function App() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      handleSubmit([{
+      handleSubmit({
         username: user['quicktype username'],
         userId: formatAuth0Sub(user.sub)
-      }]);
+      });
     }
   }, [isAuthenticated]);
 

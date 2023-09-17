@@ -40,11 +40,11 @@ const Game = () => {
       setStartTime(performance.now());
     } else if (phase === 2) {
       if (isAuthenticated) {
-        handleSubmit([{
+        handleSubmit({
           score: wpm,
           length: gameLength,
           userId: formatAuth0Sub(user.sub)
-        }]);
+        });
       }
     }
   }, [phase]);
