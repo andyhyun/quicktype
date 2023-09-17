@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const db = require('./queries');
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 dotenv.config();
 app.use(bodyParser.json());
