@@ -1,120 +1,30 @@
-const express = require('express')
-const app = express()
-const port = 8080;
+const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql2');
-const { json, query } = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
-app.use(bodyParser.json());
+const dotenv = require('dotenv');
+const db = require('./queries');
+
+const app = express();
+const port = 8080;
+
 dotenv.config();
-
-var corsOptions = {
+app.use(bodyParser.json());
+app.use(cors({
   origin: process.env.FRONTEND_URL,
-};
+}));
 
-app.use(cors(corsOptions));
+app.post('/api/users', db.addUser);
+app.get('/api/users/:userId', db.getUserScores);
 
-// create the connection to database
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  multipleStatements: true
+app.post('/api/scores', db.addScore);
+app.get('/api/scores/:length', db.getTopUsers);
+
+app.use((error, request, response, next) => {
+  console.error(error.stack);
+  res.status(500).send('Something broke!');
 });
-
-app.get('/api/test', (req, res) => {
-  res.send('Testing out the API');
-});
-
-app.post('/api/scores/', (req, res) => {
-  const cscore =req.body[0].score;
-  const clength =req.body[0].length;
-  const cuserId =req.body[0].userId;
-  const query = 'INSERT into scores(score,length,user_Id) values(' + cscore + ',' + clength + ',\'' + cuserId + '\')';
-  console.log(query);
-  connection.query(
-    query,
-    function(err, results, fields) {
-      if (err){
-        console.log(err);
-        res.status(500).send(err);
-      } else{
-        res.end();
-      }
-    }
-  );
-  
-});
-
-app.get('/api/users/:userid', (req, res) => {
-  const articles = [];
-  const fetchid = req.params.userid;
-  connection.query(
-    'SELECT AVG(score) avg_score, length FROM scores WHERE user_id = ? GROUP BY length ORDER by length; SELECT score, length, date_set FROM scores WHERE user_id = ? ORDER BY date_set DESC LIMIT 10',
-    [fetchid, fetchid],
-    function(err, results, fields) {
-      if (err) {
-        console.log(err);
-      } else {
-        let data = [];
-        data.push(results[0]);
-        data.push(results[1]);
-        console.log('Retrieved profile data');
-        res.json(data);
-      }
-    }
-  );
-});
-
-app.get('/api/scores/:length', (req, res) => {
-  const articles = [];
-  const fetchlength = req.params.length;
-  connection.query(
-    `
-    SELECT username, AVG(score) avg_score
-    FROM scores
-    INNER JOIN users
-    ON scores.user_id = users.id
-    WHERE length = ?
-    GROUP BY user_id
-    ORDER BY AVG(score)
-    DESC LIMIT 10;
-    `,
-    fetchlength,
-    function(err, results, fields) {
-      if (err){
-        console.log(err);
-      } else{
-        var data=JSON.parse(JSON.stringify(results));
-        res.send(data);
-      }
-    }
-  );
-});
-
-app.post('/api/users/', (req, res) => {
-  const cname =req.body[0].username;
-  const cuserId =req.body[0].userId;
-  const query = 'INSERT into users(username,id) values(\'' + cname + '\',\'' + cuserId + '\')';
-  console.log(query);
-  connection.query(
-    query,
-    function(err, results, fields) {
-      if (err){
-        console.log(err);
-        res.status(500).send(err);
-      } else{
-        res.end();
-      }
-    }
-  );
-  
-});
-
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`App listening on port ${port}`);
+});
+
