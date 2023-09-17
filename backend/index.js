@@ -13,6 +13,10 @@ app.use(cors({
   origin: process.env.FRONTEND_URL,
 }));
 
+app.get('/api/healthcheck', (request, response) => {
+  response.status(200).send('OK');
+});
+
 app.post('/api/users', db.addUser);
 app.get('/api/users/:userId', db.getUserScores);
 
