@@ -32,6 +32,7 @@ const Nav = styled.nav`
 .logo {
     max-width:  50px;
     max-height: 50px;
+    margin-right: .25rem;
 }
 `
 
