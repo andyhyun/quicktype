@@ -59,18 +59,9 @@ const Game = () => {
       e.target.style.backgroundColor = '#eb3d7c';
     }
 
-    if ((e.key === ' ' || e.target.value.charAt(e.target.value.length - 1) === ' ') && e.target.value === '') {
-      // Pressing space with nothing in text input
-      e.preventDefault();
-    } else if ((e.key === ' ' || e.target.value.charAt(e.target.value.length - 1) === ' ') && e.target.value.trimEnd() === promptWords[currentWordIndex]) {
-      // Pressing space when word is typed correctly
-      e.preventDefault();
-      e.target.value = '';
-      promptEl.current.children[currentWordIndex].style.color = '#58f558';
-      setCurrentWordIndex(currentWordIndex + 1);
-    } else if (
+    if (
       currentWordIndex === gameLength - 1
-      && promptWords[currentWordIndex] === e.target.value
+      && promptWords[currentWordIndex] === e.target.value.trimEnd()
     ) {
       // Handle the game ending here
       e.preventDefault();
@@ -79,6 +70,15 @@ const Game = () => {
       setCurrentWordIndex(currentWordIndex + 1);
       setWpm(Math.round((promptWords.join(' ').length / 5) / ((performance.now() - startTime) / 60000)));
       setPhase(2);
+    } else if ((e.key === ' ' || e.target.value.charAt(e.target.value.length - 1) === ' ') && e.target.value === '') {
+      // Pressing space with nothing in text input
+      e.preventDefault();
+    } else if ((e.key === ' ' || e.target.value.charAt(e.target.value.length - 1) === ' ') && e.target.value.trimEnd() === promptWords[currentWordIndex]) {
+      // Pressing space when word is typed correctly
+      e.preventDefault();
+      e.target.value = '';
+      promptEl.current.children[currentWordIndex].style.color = '#58f558';
+      setCurrentWordIndex(currentWordIndex + 1);
     }
   }
 
