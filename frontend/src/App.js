@@ -1,7 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton';
 import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 import {
   Routes,
@@ -22,7 +19,7 @@ const ProtectedRoute = ({ component, ...args }) => {
 };
 
 function App() {
-  const { isLoading, error, user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   
   const handleSubmit = async (data) => {
     try {
@@ -54,7 +51,6 @@ function App() {
         <Route path='/' element={<Game />}></Route>
         <Route path='/leaderboard' element={<Leaderboard />}></Route>
         <Route path='/profile' element={<ProtectedRoute component={Profile} />}></Route>
-        {/* <Route path='/game' element={<Game />}></Route> */}
       </Routes>
     </div>
   );
