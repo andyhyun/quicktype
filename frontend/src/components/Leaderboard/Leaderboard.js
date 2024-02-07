@@ -38,31 +38,31 @@ const Leaderboard = () => {
     <div className="leaderboard-body">
       <div className="container" key={leaderboardKey}>
         <h1>Top 10 Leaderboards</h1>
-        <div className='length-select'>
+        <div className="length-select">
           <div># of words:</div>
-          <div className='radio-buttons'>
+          <div className="radio-buttons">
             <div ref={tenEl}>
-              <input type='radio' name='length' id='10' value='10' onChange={handleChange} />
-              <label htmlFor='10' className={(gameLength === 10) ? 'active' : 'inactive'}>10</label>
+              <input type="radio" name="length" id="10" value="10" onChange={handleChange} />
+              <label htmlFor="10" className={(gameLength === 10) ? 'active' : 'inactive'}>10</label>
             </div>
             <div ref={twentyFiveEl}>
-              <input type='radio' name='length' id='25' value='25' onChange={handleChange} />
-              <label htmlFor='25' className={(gameLength === 25) ? 'active' : 'inactive'}>25</label>
+              <input type="radio" name="length" id="25" value="25" onChange={handleChange} />
+              <label htmlFor="25" className={(gameLength === 25) ? 'active' : 'inactive'}>25</label>
             </div>
             <div ref={fiftyEl}>
-              <input type='radio' name='length' id='50' value='50' onChange={handleChange} />
-              <label htmlFor='50' className={(gameLength === 50) ? 'active' : 'inactive'}>50</label>
+              <input type="radio" name="length" id="50" value="50" onChange={handleChange} />
+              <label htmlFor="50" className={(gameLength === 50) ? 'active' : 'inactive'}>50</label>
             </div>
             <div ref={oneHundredEl}>
-              <input type='radio' name='length' id='100' value='100' onChange={handleChange} />
-              <label htmlFor='100' className={(gameLength === 100) ? 'active' : 'inactive'}>100</label>
+              <input type="radio" name="length" id="100" value="100" onChange={handleChange} />
+              <label htmlFor="100" className={(gameLength === 100) ? 'active' : 'inactive'}>100</label>
             </div>
           </div>
         </div>
         <table>
           <thead>
             <tr>
-              <th className='rank-col'>#</th>
+              <th className="rank-col">#</th>
               <th>Username</th>
               <th>Average WPM</th>
             </tr>
@@ -76,7 +76,7 @@ const Leaderboard = () => {
               </tr>
             ))}
             {scores.length === 0 && (
-              <tr className={'even'}>
+              <tr className="even">
                 <td>1</td>
                 <td>--</td>
                 <td>--</td>

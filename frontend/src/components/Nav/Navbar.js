@@ -25,27 +25,26 @@ const Nav = styled.nav`
     display: flex;
     align-items: center;
     padding: .25rem
-}
-.site-title {
+  }
+  .site-title {
     font-size: 2rem;
-}
-.logo {
+  }
+  .logo {
     max-width:  50px;
     max-height: 50px;
     margin-right: .25rem;
-}
-`
+  }
+`;
 
 const Navbar = () => {
   return (
     <Nav>
       <div className={"nav"}>
         <Link to={'/'} className={"site-title"}><img src="qtlogo.png" alt="logo" className={"logo"}/>QuickType</Link>
-        {/* <a href={"/"} className={"site-title"}><img src="qtlogo.png" alt="logo" className={"logo"}/>QuickType</a> */}
       </div>
       <Burger />
     </Nav>
   )
 }
 
-export default Navbar
+export default Navbar;

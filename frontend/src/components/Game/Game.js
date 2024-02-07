@@ -97,45 +97,45 @@ const Game = () => {
   }
 
   return (
-    <div className='game-body'>
-      <div className='container' key={gameKey}>
+    <div className="game-body">
+      <div className="container" key={gameKey}>
         {!isLoading && !isAuthenticated && (
           <div className="message"><span onClick={() => loginWithRedirect()}>Sign in</span> or <span onClick={() => loginWithRedirect()}>register</span> to record your scores and compete on the leaderboards!</div>
         )}
-        <div className='top-bar'>
-          <div className='length-select'>
+        <div className="top-bar">
+          <div className="length-select">
             <div># of words:</div>
-            <div className='radio-buttons'>
+            <div className="radio-buttons">
               <div>
-                <input type='radio' name='length' id='10' value='10' onChange={handleChange} />
-                <label htmlFor='10' className={(gameLength === 10) ? 'active' : 'inactive'}>10</label>
+                <input type="radio" name="length" id="10" value="10" onChange={handleChange} />
+                <label htmlFor="10" className={(gameLength === 10) ? 'active' : 'inactive'}>10</label>
               </div>
               <div>
-                <input type='radio' name='length' id='25' value='25' onChange={handleChange} />
-                <label htmlFor='25' className={(gameLength === 25) ? 'active' : 'inactive'}>25</label>
+                <input type="radio" name="length" id="25" value="25" onChange={handleChange} />
+                <label htmlFor="25" className={(gameLength === 25) ? 'active' : 'inactive'}>25</label>
               </div>
               <div>
-                <input type='radio' name='length' id='50' value='50' onChange={handleChange} />
-                <label htmlFor='50' className={(gameLength === 50) ? 'active' : 'inactive'}>50</label>
+                <input type="radio" name="length" id="50" value="50" onChange={handleChange} />
+                <label htmlFor="50" className={(gameLength === 50) ? 'active' : 'inactive'}>50</label>
               </div>
               <div>
-                <input type='radio' name='length' id='100' value='100' onChange={handleChange} />
-                <label htmlFor='100' className={(gameLength === 100) ? 'active' : 'inactive'}>100</label>
+                <input type="radio" name="length" id="100" value="100" onChange={handleChange} />
+                <label htmlFor="100" className={(gameLength === 100) ? 'active' : 'inactive'}>100</label>
               </div>
             </div>
           </div>
-          <div className='stats'>{wpm} WPM</div>
+          <div className="stats">{wpm} WPM</div>
         </div>
-        <div className='typing-area'>
-          <div ref={promptEl} className='prompt'>{promptDivs}</div>
-          <div className='controls'>
+        <div className="typing-area">
+          <div ref={promptEl} className="prompt">{promptDivs}</div>
+          <div className="controls">
             <input
-              type='text'
+              type="text"
               onKeyDown={handleKeyDown}
               onKeyUp={handleKeyDown}
               autoFocus
             />
-            <button type='button' onClick={handleRedo}>redo</button>
+            <button type="button" onClick={handleRedo}>redo</button>
           </div>
         </div>
       </div>

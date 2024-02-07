@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Route, Link} from "react-router-dom";
-import Leaderboard from "../Leaderboard/Leaderboard";
-import Profile from "../Profile/Profile";
-import Game from "../Game/Game";
+import { Route, Link } from 'react-router-dom';
 import LoginButton from "../LoginButton";
 import LogoutButton from "../LogoutButton";
 import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
@@ -22,7 +19,7 @@ const Ul = styled.ul`
     display: flex;
     align-items: center;
     padding: .25rem
-}
+  }
 
   @media (max-width: 768px) {
     flex-flow: column nowrap;
@@ -42,16 +39,13 @@ const Ul = styled.ul`
 `;
 
 const RightNav = ({ open }) => {
-   const { isLoading, error } = useAuth0();
-    return (
+  const { isLoading, error } = useAuth0();
+  return (
     <Ul open={open}>
       <li><Link to={'/'}>Game</Link></li>
       <li><Link to={'/leaderboard'}>Leaderboard</Link></li>
       <li><Link to={'/profile'}>Profile</Link></li>
-      {/* <li><a href={"/"}>Game</a></li>
-      <li><a href={"/leaderboard"}>Leaderboard</a></li>
-      <li><a href={"/profile"}>Profile</a></li> */}
-      <main className='column'>
+      <main className="column">
         {error && <p>Authentication Error</p>}
         {!error && isLoading && <p>Loading...</p>}
         {!error && !isLoading && (
@@ -65,4 +59,4 @@ const RightNav = ({ open }) => {
   )
 }
 
-export default RightNav
+export default RightNav;

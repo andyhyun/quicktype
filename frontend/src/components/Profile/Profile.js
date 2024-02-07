@@ -1,7 +1,6 @@
 import './Profile.css';
 import React, { useEffect, useState } from 'react';
 import {useAuth0} from '@auth0/auth0-react';
-import { useParams } from 'react-router-dom';
 import { formatAuth0Sub, formatAverageWpm } from '../../util/gameUtil';
 
 const apiURL = process.env.REACT_APP_API_URL || 'https://www.quicktype.app';
@@ -57,7 +56,7 @@ const Profile = () => {
                   </tr>
                 ))}
                 {averageScores.length === 0 && (
-                  <tr className={'even'}>
+                  <tr className="even">
                     <td>--</td>
                     <td>--</td>
                   </tr>
@@ -82,7 +81,7 @@ const Profile = () => {
                   </tr>
                 ))}
                 {scores.length === 0 && (
-                  <tr className={'even'}>
+                  <tr className="even">
                     <td>--</td>
                     <td>--</td>
                   </tr>
